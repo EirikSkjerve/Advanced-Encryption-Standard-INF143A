@@ -10,7 +10,6 @@ def random_bitstring(p):
     return(bitstring)
 
 
-
 '''Takes an input of any size and splits it into blocks of lenght n. If the last block is shorter than n, it is padded with 0's'''
 def split_blocks(input_block, size)->list:
     split_blocks = []

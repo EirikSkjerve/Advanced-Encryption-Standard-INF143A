@@ -49,8 +49,17 @@ def XOR(bitstr1, bitstr2)->str:
 def s_box()->str:
     return None
 
-def binary_to_hex(string)->str:
-    return None
+'''Converts binary string to hexadecimal string, and vice versa'''
+def binary_to_hex(string)->tuple:
+    if len(string) != 8:
+        raise ValueError
+    
+    a_hex = format(int(string[:4], 2), 'x')
+    b_hex = format(int(string[4:], 2), 'x')
+    return (a_hex, b_hex)
+
 
 def hex_to_binary(string)->str:
+    if len(string) != 2:
+        raise ValueError
     return None

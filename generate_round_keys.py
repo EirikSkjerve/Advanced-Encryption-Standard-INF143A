@@ -4,7 +4,7 @@ round_coefficients = ["00000001", "00000010", "00000100", "00001000", "00010000"
                       "00100000", "01000000", "10000000", "00011011", "00110110"]
 
 '''Generate 11 round keys
-K0 is of course just the plain key'''
+Key zero is of course just the plain key'''
 def generate_round_keys(key)->list:
     keys = [key]
     for i in range(1, 11):

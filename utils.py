@@ -50,7 +50,7 @@ def s_box()->str:
     return None
 
 '''Converts binary string to hexadecimal string, and vice versa'''
-def binary_to_hex(string)->tuple:
+def binary_to_hex(string)->str:
     if len(string) != 8:
         raise ValueError
 

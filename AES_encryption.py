@@ -1,4 +1,4 @@
-from utils import split_blocks, XOR, s_box_get, binary_to_hex
+from utils import split_blocks, XOR, s_box_get, binary_to_hex, hex_to_binary
 from generate_round_keys import generate_round_keys
 
 
@@ -15,7 +15,7 @@ def encrypt(plaintext, key)->str:
         for i in range(10):
             round_key = round_keys[i+1]
             block = encryption_round(block, round_key, i)
-            print(f"Block after {i} iterations: {block}")
+            #print(f"Block after {i} iterations: {block}")
             
         cipher_blocks.append(block)
             
@@ -27,26 +27,20 @@ def encryption_round(plain_block, round_key, round_number):
     for block in blocks:
         block = (s_box_get(block))
         permuted_blocks.append(block)
-    
-    main_block = "".join(permuted_blocks)
-    
+
+    main_block = shift_rows(permuted_blocks)
     if round_number != 9:
         '''
-        Only ShiftRows
+        MixColumn
         '''
-        pass
-    else:
-        '''
-        ShiftRows
-        MixColumn 
-        '''
-        pass
-
+    main_block = [hex_to_binary(h) for h in sum(main_block, [])]
+    #flattens the matrix into a list
+    main_block = "".join(main_block)
     main_block = XOR(main_block, round_key)
     return main_block
 
 def shift_rows(block):
-    eight_bit_blocks = split_blocks(block, 8)
+    eight_bit_blocks = block
     hex_blocks = [binary_to_hex(b) for b in eight_bit_blocks]
     matrix = [["","","",""],
               ["","","",""],
@@ -62,7 +56,8 @@ def shift_rows(block):
     matrix[2] = shift_left(matrix[2],2)
     matrix[3] = shift_left(matrix[3],3)
     
-    return sum(matrix, [])
+
+    return matrix
 
 def shift_left(row, num_shifts):
     temp = ["", "", "", ""]

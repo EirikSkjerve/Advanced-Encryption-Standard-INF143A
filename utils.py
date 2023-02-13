@@ -53,19 +53,12 @@ def s_box()->str:
 def binary_to_hex(string)->tuple:
     if len(string) != 8:
         raise ValueError
-    
-    a_hex = format(int(string[:4], 2), 'x')
-    b_hex = format(int(string[4:], 2), 'x')
-    return a_hex+b_hex
+
+    return format(int(string[:4], 2), 'x')+format(int(string[4:], 2), 'x')
 
 
 def hex_to_binary(string)->str:
     if len(string) != 2:
         raise ValueError
-    
-    a_hex = string[0]
-    b_hex = string[1]
-    
-    a_bin = bin(int(a_hex, 16))[2:].zfill(4)
-    b_bin = bin(int(b_hex, 16))[2:].zfill(4)
-    return a_bin+b_bin
+
+    return bin(int(string[0], 16))[2:].zfill(4)+bin(int(string[1], 16))[2:].zfill(4)

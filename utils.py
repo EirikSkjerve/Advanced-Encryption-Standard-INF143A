@@ -45,10 +45,12 @@ def XOR(bitstr1, bitstr2)->str:
 
     return bits
 
-a = random_bitstring(128)
-b = random_bitstring(128)
+'''(8,8) byte substitution function that serves as the AES S-box'''
+def s_box()->str:
+    return None
 
-print(a)
-print(b)
+def binary_to_hex(string)->str:
+    return None
 
-print(XOR(a,b))
+def hex_to_binary(string)->str:
+    return None

@@ -56,10 +56,16 @@ def binary_to_hex(string)->tuple:
     
     a_hex = format(int(string[:4], 2), 'x')
     b_hex = format(int(string[4:], 2), 'x')
-    return (a_hex, b_hex)
+    return a_hex+b_hex
 
 
 def hex_to_binary(string)->str:
     if len(string) != 2:
         raise ValueError
-    return None
+    
+    a_hex = string[0]
+    b_hex = string[1]
+    
+    a_bin = bin(int(a_hex, 16))[2:].zfill(4)
+    b_bin = bin(int(b_hex, 16))[2:].zfill(4)
+    return a_bin+b_bin

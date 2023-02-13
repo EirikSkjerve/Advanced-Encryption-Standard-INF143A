@@ -48,13 +48,27 @@ def encryption_round(plain_block, round_key, round_number):
 def shift_rows(block):
     eight_bit_blocks = split_blocks(block, 8)
     hex_blocks = [binary_to_hex(b) for b in eight_bit_blocks]
-    print(hex_blocks)
-    '''matrix = [["","","",""], ["","","",""], ["","","",""], ["","","",""]]
-    for row in range(len(matrix)):
-        for column in range(len(row)):
-            
-            matrix[row][column] = binary_to_hex(eight_bit_blocks[(row*column)+column])'''
-    return None
+    matrix = [["","","",""],
+              ["","","",""],
+              ["","","",""],
+              ["","","",""]]
+    
+    for h in range(16):
+        row = h%4
+        column = h//4
+        matrix[row][column] = hex_blocks[h]
+    
+    matrix[1] = shift_left(matrix[1],1)
+    matrix[2] = shift_left(matrix[2],2)
+    matrix[3] = shift_left(matrix[3],3)
+    
+    return sum(matrix, [])
+
+def shift_left(row, num_shifts):
+    temp = ["", "", "", ""]
+    for r in range(len(row)):
+        temp[(r-num_shifts)%4] = row[r]
+    return temp
 
 def decrypt(ciphertext, key)->str:
     return None

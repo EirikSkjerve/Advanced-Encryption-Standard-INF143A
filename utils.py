@@ -1,3 +1,5 @@
+import base64
+
 '''Random key and bitstring generator for testing. This is not safe for real usage'''
 def random_bitstring(p):
      

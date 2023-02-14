@@ -5,18 +5,25 @@ from F2_8_implementation import multiply, field_sum_list
 
 def encrypt(plaintext, key)->str:
     
+    #splits up the plaintext in 128-bit blocks
     blocks = split_blocks(plaintext, 128)
+    
+    #generates the round keys
     round_keys = generate_round_keys(key)
     
+    #where ciphertext will be placed
     cipher_blocks = []
     
+    #encrypts each 128-bit block separately
     for block in blocks:
+        
+        #step 1: xor the plaintext block with the main key
         block = XOR(block, key)
         
+        #perform 10 steps of diffusion and confusion
         for i in range(10):
             round_key = round_keys[i+1]
             block = encryption_round(block, round_key, i)
-            #print(f"Block after {i} iterations: {block}")
             
         cipher_blocks.append(block)
             
@@ -25,6 +32,7 @@ def encrypt(plaintext, key)->str:
 def encryption_round(plain_block, round_key, round_number):
     blocks = split_blocks(plain_block, 8)
     permuted_blocks = []
+    
     for block in blocks:
         block = (s_box_get(block))
         permuted_blocks.append(block)

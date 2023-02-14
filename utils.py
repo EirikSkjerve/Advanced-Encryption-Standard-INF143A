@@ -51,6 +51,12 @@ def binary_to_hex(string)->str:
 
     return format(int(string[:4], 2), 'x')+format(int(string[4:], 2), 'x')
 
+def unlim_bin_to_hex(bitstring):
+    characters = ""
+    for s in range(0, len(bitstring), 8):
+
+        characters += format(int(bitstring[s:s+8], 2), 'x')
+    return characters
 
 def hex_to_binary(string)->str:
     if len(string) != 2:
@@ -106,3 +112,16 @@ def binary_to_string(bitstring):
 
         characters += chr(int(bitstring[s:s+8],2))
     return characters
+
+def secret_to_binary(secret):
+    if len(secret) != 16:
+        print("secret needs to be of lenght 16")
+        raise ValueError
+    bin_key = ""
+
+    for s in secret:
+        bin_key += (bin(ord(s))[2:].zfill(8))
+    if len(bin_key) != 128:
+        print("Key is not lenght 128")
+        raise ValueError
+    return bin_key

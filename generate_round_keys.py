@@ -1,4 +1,4 @@
-from utils import split_blocks, XOR, s_box_get, random_bitstring
+from utils import split_blocks, XOR, s_box_get
 
 round_coefficients = ["00000001", "00000010", "00000100", "00001000", "00010000",
                       "00100000", "01000000", "10000000", "00011011", "00110110"]

@@ -1,4 +1,4 @@
-from utils import split_blocks, XOR, s_box_get, binary_to_hex, hex_to_binary
+from utils import *
 from generate_round_keys import generate_round_keys
 from F2_8_implementation import multiply, field_sum_list
 
@@ -55,32 +55,6 @@ def encryption_round(plain_block, round_key, round_number):
     
     return main_block
 
-def block_to_matrix(blocks):
-    
-    #converts every 8-bit sequence into hexadecimal
-    hex_blocks = [binary_to_hex(b) for b in blocks]
-    
-    matrix = [["","","",""],
-              ["","","",""],
-              ["","","",""],
-              ["","","",""]]
-    
-    #distributes the list of hex-values into the 4x4 matrix
-    for h in range(16):
-        row = h%4
-        column = h//4
-        matrix[row][column] = hex_blocks[h]
-        
-    return matrix
-
-def matrix_to_block(matrix):
-    #flattens the matrix into a list
-    #takes in a matrix of integers, and converts them to binary
-    #this method is apparently not efficient in terms of space time complexity
-    main_block = [hex_to_binary(h) for h in sum(matrix, [])]
-    main_block = "".join(main_block)
-    return main_block
-
 def shift_rows(matrix):
     
     #shifts the rows according to the AES standard
@@ -101,7 +75,7 @@ def shift_left(row, num_shifts):
 '''Have confirmed that this works as it should'''
 def mix_columns(matrix):
     #fixed matrix A
-    A = [[2,3,1,1],[1,2,3,1],[1,1,2,3],[3,1,1,2]]
+    A = A = [[2,3,1,1],[1,2,3,1],[1,1,2,3],[3,1,1,2]]
     #empty initialized product matrix
     product_matrix = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
     

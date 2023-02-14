@@ -1,15 +1,35 @@
 
-polynomial_1 = ["x^8", "x^4", "x^3", "x", "1"]
-polynomial_2 = ["x^7", "x^5", "x^4", "x^2", "1"]
+#base_polynomial = ["x^8", "x^4", "x^3", "x", "1"] #the AES polynomial
 
-def add(polynomial_1, polynomial_2):
-    pass
+irreducible_polynomial = int("100011011", 2)
+p = 253
+q = 113
 
-def multiply(polynomial_1, polynomial_2):
-    pass
+field_characteristic = 2
+field_degree = 8
 
-def converto_to_vector(polynomial):
-    pass
 
-def find_inverse(polynomial):
-    pass
+#thanks to Nikolay S. Kaleyski for C code, and thanks to chatgpt for translation to python
+def multiply(p, q, primal_poly, degree):
+    result = 0
+    # The value at which we should reduce using the irreducible polynomial
+    cutoff = 1
+    for i in range(degree-1):
+        cutoff <<= 1
+    while p and q:
+        if q & 1: # If b is odd, add a to the total
+            result ^= p
+        if p & cutoff:
+            p = (p << 1) ^ primal_poly # reduce
+        else:
+            p <<= 1
+        q >>= 1
+    return result
+
+
+def add(p, q):
+    return p^q
+
+
+'''
+'''

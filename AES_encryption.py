@@ -53,6 +53,7 @@ def block_to_matrix(block):
 
 def matrix_to_block(matrix):
     #flattens the matrix into a list
+    #takes in a matrix of integers, and converts them to binary
     #this method is apparently not efficient in terms of space time complexity
     main_block = [hex_to_binary(h) for h in sum(matrix, [])]
     main_block = "".join(main_block)
@@ -85,11 +86,14 @@ def mix_columns(matrix):
             product_matrix[i][j] = field_sum_list([multiply(A_row[x],input_column[x]) for x in range(4)])
     
     
-    return product_matrix
+    return integer_matrix_to_hex(product_matrix)
 
 def integer_matrix_to_hex(int_matrix):
-    
-    return None
+    converted_matrix = [["","","",""],["","","",""],["","","",""],["","","",""]]
+    for i in range(4):
+        for j in range(4):
+            converted_matrix[i][j] = binary_to_hex(bin(int_matrix[i][j])[2:].zfill(8))
+    return converted_matrix
 
 def decrypt(ciphertext, key)->str:
     return None

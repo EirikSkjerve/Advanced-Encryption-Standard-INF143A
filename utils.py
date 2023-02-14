@@ -80,10 +80,29 @@ Sbox = [
             ['8C', 'A1', '89', '0D', 'BF', 'E6', '42', '68', '41', '99', '2D', '0F', 'B0', '54', 'BB', '16']
             ]
 
-'''Takes an 8-bit string and returns its related sbox byte, converted to binary again'''
+'''Takes an 8-bit string and returns its related sbox byte, converted to binary again
+The AES Sbox
+'''
 def s_box_get(byte)->str:
     #if input is a bitstring of lenght 8:
     row = int(byte[:4], 2)
     column = int(byte[4:], 2)
     return hex_to_binary(Sbox[row][column])
 
+'''String to binary, given each character is represented by 8 bits'''
+def string_to_binary(plaintext):
+
+    word_in_binary = ""
+
+    for p in plaintext:
+        word_in_binary += (bin(ord(p))[2:].zfill(8))
+    
+    return word_in_binary
+
+'''Binary to string, given each character is represented by 8 bits'''
+def binary_to_string(bitstring):
+    characters = ""
+    for s in range(0, len(bitstring), 8):
+
+        characters += chr(int(bitstring[s:s+8],2))
+    return characters
